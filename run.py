@@ -1,21 +1,19 @@
 import ctypes
+import os
 import os.path
 import sys
 import time
 
-try:
-    count = int(sys.argv[1])
-except IndexError:
-    count = 1000000
-
 curr_dir = os.path.dirname(__file__)
-lib = ctypes.cdll.LoadLibrary(os.path.join(curr_dir, "lib.so"))
+default_lib_path = os.path.join(curr_dir, "builds/lib.so")
+lib_path = os.environ.get("RUNPY_LIB_PATH", default_lib_path)
+lib = ctypes.cdll.LoadLibrary(lib_path)
 
 lib.cNoop.argtypes = []
 lib.cNoop.restype = ctypes.c_void_p
 
 started = time.time()
-for i in range(count):
+for i in range(1000000):
     lib.cNoop()
 
 took = time.time() - started
