@@ -8,7 +8,7 @@ mv builds/liblocal.h builds/local.h
 # give ldd a helping hand so it can find the shared object build by GHA
 #
 if [ ! -f builds/libgha2.so ]; then
-    ln -s bin/lib.so.gha2 bin/libgha2.so
+    ln -s builds/lib.so.gha2 builds/libgha2.so
 fi
 
 gcc cmd/run/main.c -Ibuilds -Lbuilds -llocal -o bin/runlocal
