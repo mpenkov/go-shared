@@ -4,7 +4,10 @@ on: [push]
 
 jobs:
   golang:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout gpnutil
         uses: actions/checkout@v4
@@ -23,5 +26,5 @@ jobs:
       - name: Save shared library as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: lib.so
-          path: lib.so
+          name: lib-${{ matrix.os }}.so
+          path: lib-${{ matrix.os }}.so

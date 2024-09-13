@@ -25,3 +25,13 @@ made 1000000 calls in 0.26s
 
 - Why is the runtime so dramatically slower for the shared object built by Github Actions?
 - How can I get Github Actions to build shared objects that aren't so slow to use?
+
+## Notes
+
+To see the symbols unique to the local file:
+
+```bash
+export LC_ALL=C
+comm <(nm -C lib.so.local | awk '{print $3}' | sort -u) <(nm -C lib.so.gha2 | awk '{print $3}' | sort -u) -23
+```
+
