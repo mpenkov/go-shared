@@ -9,7 +9,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout gpnutil
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Go

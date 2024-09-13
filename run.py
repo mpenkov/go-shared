@@ -7,7 +7,7 @@ import time
 curr_dir = os.path.dirname(__file__)
 default_lib_path = os.path.join(curr_dir, "builds/lib.so.local")
 lib_path = os.environ.get("RUNPY_LIB_PATH", default_lib_path)
-lib = ctypes.cdll.LoadLibrary(lib_path)
+lib = ctypes.cdll.LoadLibrary(os.path.abspath(lib_path))
 
 lib.cNoop.argtypes = []
 lib.cNoop.restype = ctypes.c_void_p
